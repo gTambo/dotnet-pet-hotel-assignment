@@ -53,6 +53,7 @@ namespace pet_hotel.Controllers
 
             // Tell the DB context about the updated pet owner object
             _context.Update(pet);
+            // _context.Update(PetOwner.petCount++)
 
             // and save the pet owner object to the DB
             _context.SaveChanges();

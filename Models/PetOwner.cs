@@ -12,6 +12,9 @@ namespace pet_hotel
 
         [Required]
         public string name {get; set;}
+
+        [NotMapped]
         public int petCount {get; set;}
+        
     }
 }
