@@ -25,6 +25,14 @@ namespace pet_hotel.Controllers
             // return new List<PetOwner>();
         }
 
+        // get by id
+        [HttpGet("{id}")]
+        public PetOwner GetById(int id)
+{
+    return _context.PetOwnerTable
+            .SingleOrDefault(petOwner => petOwner.id == id);
+
+}
         [HttpPost]
         public PetOwner Post(PetOwner petOwner) 
         {
@@ -32,5 +40,38 @@ namespace pet_hotel.Controllers
             _context.SaveChanges();
             return petOwner;
         }
+    
+        // put route /api/PetOwners/:id
+        [HttpPut("{id}")]
+        public PetOwner Put(int id, PetOwner petOwner)
+        {
+            // DB context needs to know the id of the pet owner to update
+            petOwner.id = id;
+
+            // Tell the DB context about the updated pet owner object
+            _context.Update(petOwner);
+
+            // and save the pet owner object to the DB
+            _context.SaveChanges();
+
+            // respond back with the created pet owner object            
+            return petOwner;
+
+        }
+        
+
+        // delete route
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            // Find the petowner by ID
+            PetOwner petowner = _context.PetOwnerTable.Find(id);
+            // Tell the DB we want to remove this pet owner
+            _context.PetOwnerTable.Remove(petowner);
+            // Save changes to the database
+            _context.SaveChanges();
+        }
+
     }
+
 }
