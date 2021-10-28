@@ -26,10 +26,11 @@ namespace pet_hotel.Controllers
         }
 
         [HttpPost]
-        public PetOwner Post(PetOwner petowner) 
+        public PetOwner Post(PetOwner petOwner) 
         {
-            _context.Add(petowner);
+            _context.Add(petOwner);
             _context.SaveChanges();
+            return petOwner;
         }
     }
 }
