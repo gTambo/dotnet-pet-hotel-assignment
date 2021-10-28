@@ -28,11 +28,11 @@ namespace pet_hotel.Controllers
         // get by id
         [HttpGet("{id}")]
         public PetOwner GetById(int id)
-{
-    return _context.PetOwnerTable
-            .SingleOrDefault(petOwner => petOwner.id == id);
+        {
+            return _context.PetOwnerTable
+                    .SingleOrDefault(petOwner => petOwner.id == id);
 
-}
+        }
         [HttpPost]
         public PetOwner Post(PetOwner petOwner) 
         {

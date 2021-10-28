@@ -28,17 +28,59 @@ namespace pet_hotel.Controllers
             .Include(pet => pet.petOwner);
         }
 
-        []
+        // Get by Id
+        [HttpGet("{id}")]
+        public Pet GetById(int id)
+        {
+            return _context.PetTable
+                    .SingleOrDefault(pet => pet.id == id);
 
+        }
+        // POST
+        [HttpPost]
+        public Pet Post(Pet pet) 
+        {
+            _context.Add(pet);
+            _context.SaveChanges();
+            return pet;
+        }
 
+        // PUT 
+        [HttpPut("{id}")]
+        public Pet Put(int id, Pet pet)
+        {
+            // DB context needs to know the id of the pet owner to update
+            pet.id = id;
 
+            // Tell the DB context about the updated pet owner object
+            _context.Update(pet);
 
+            // and save the pet owner object to the DB
+            _context.SaveChanges();
 
+            // respond back with the created pet owner object            
+            return pet;
 
+        }
 
+           // delete route
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            // Find the petowner by ID
+            Pet pet = _context.PetTable.SingleOrDefault(pet => pet.id == id);
+            // Tell the DB we want to remove this pet owner
+            _context.PetTable.Remove(pet);
+            // Save changes to the database
+            _context.SaveChanges();
+        }
 
     
     }
+    
+
+      
+        
 }
 
 
